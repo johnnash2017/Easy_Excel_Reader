@@ -7,37 +7,33 @@
 godot_excel_reader：https://github.com/johnnash2017/godot_excel_reader
 
 规则 | rule
-# 中文注释：
-#1 每列的第一行是列名，每个表若想在游戏中调
-# 用就必须有“ID”列，这个唯一标识的名字可以在代码里改
-#2 每列的第二行是列的类型，目前仅支持Int、float、String、Bool几
-# 种基础类型，在代码里可以拓展更多类型或对特定类型进行多样处理
-#3 无ID的行会被忽略，即便该行后续的列中配置了数据
-#4 导出配置列默认为True，若为False则该行数据不会
-# 被使用，导出配置列用不上可以不配
-#5 查询表格时只需要给出ID和列名即可获得数据，当一个
-# 表内多行拥有相同ID时该表将被视为多级表，查询该表需要额外输入一个等级参数
-# English Comments:
-#1 The first row of each column is the column name, each table must have an "ID" column if it wants to be used in the game.
-# This unique identifier can be changed in the code.
-#2 The second row of each column is the type of the column, currently only Int, float, String, Bool are supported.
-# More types can be extended or specific types can be handled diversely in the code.
-#3 Rows without an ID will be ignored, even if data is configured in subsequent columns.
-#4 Export configuration columns default to True, if False then the row data will not be used.
-# Export configuration columns that are unused can be omitted.
-#5 When querying a table, you only need to provide the ID and column name to get the data.
-# If multiple rows in a table have the same ID, the table will be considered a multi-level table,
-# and querying this table requires an additional level parameter.
+
+1 每列的第一行是列名，每个表若想在游戏中调用就必须有“ID”列，这个唯一标识的名字可以在代码里改
+2 每列的第二行是列的类型，目前仅支持Int、float、String、Bool几种基础类型，在代码里可以拓展更多类型或对特定类型进行多样处理
+3 无ID的行会被忽略，即便该行后续的列中配置了数据
+4 导出配置列默认为True，若为False则该行数据不会被使用，导出配置列用不上可以不配
+5 查询表格时只需要给出ID和列名即可获得数据，当一个表内多行拥有相同ID时该表将被视为多级表，查询该表需要额外输入一个等级参数
+
+1 The first row of each column is the column name, each table must have an "ID" column if it wants to be used in the game.This unique identifier can be changed in the code.
+2 The second row of each column is the type of the column, currently only Int, float, String, Bool are supported.More types can be extended or specific types can be handled diversely in the code.
+3 Rows without an ID will be ignored, even if data is configured in subsequent columns.
+4 Export configuration columns default to True, if False then the row data will not be used.Export configuration columns that are unused can be omitted.
+5 When querying a table, you only need to provide the ID and column name to get the data.If multiple rows in a table have the same ID, the table will be considered a multi-level table,and querying this table requires an additional level parameter.
 
 
 测试数据  | Test data
+
 sheet"语言"
+
 ![image](https://github.com/user-attachments/assets/f6c47263-6023-4006-b41c-5fcb37d6cd34)
 sheet"角色"
+
 ![image](https://github.com/user-attachments/assets/542ebc4f-30fa-48cb-b1fb-682b2a8e5c1d)
 sheet"等级"
+
 ![image](https://github.com/user-attachments/assets/d1d00263-9099-4c5b-aeef-6b069a24063b)
 sheet"技能"
+
 ![image](https://github.com/user-attachments/assets/9f4ae29f-02d6-48b6-b7f1-18a10c4e6294)
 
 
