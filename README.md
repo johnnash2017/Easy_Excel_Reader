@@ -2,11 +2,7 @@
 
 创建一个godot4.4新工程并覆盖至根目录，然后关闭编辑器再重新打开编辑器以保证错误的UID引用被修正即可运行test.tscn场景进行测试。 |  Create a new Godot 4.4 project and overwrite it to the root directory, then close and reopen the editor to ensure that the incorrect UID references are corrected, and you can run the test.tscn scene for testing.
 
-
-#这部分负责从excel转换为字典 | This part is responsible for converting from Excel to dictionary 
-godot_excel_reader：https://github.com/johnnash2017/godot_excel_reader
-
-规则 | rule
+**规则 | rule**
 
 1 每列的第一行是列名，每个表若想在游戏中调用就必须有“ID”列，这个唯一标识的名字可以在代码里改
 
@@ -29,27 +25,72 @@ godot_excel_reader：https://github.com/johnnash2017/godot_excel_reader
 5 When querying a table, you only need to provide the ID and column name to get the data.If multiple rows in a table have the same ID, the table will be considered a multi-level table,and querying this table requires an additional level parameter.
 
 
-测试数据  | Test data
+**测试数据  | Test data**
 
 sheet"语言"
 
 ![image](https://github.com/user-attachments/assets/f6c47263-6023-4006-b41c-5fcb37d6cd34)
+
 sheet"角色"
 
 ![image](https://github.com/user-attachments/assets/542ebc4f-30fa-48cb-b1fb-682b2a8e5c1d)
+
 sheet"等级"
 
 ![image](https://github.com/user-attachments/assets/d1d00263-9099-4c5b-aeef-6b069a24063b)
+
 sheet"技能"
 
 ![image](https://github.com/user-attachments/assets/9f4ae29f-02d6-48b6-b7f1-18a10c4e6294)
 
+**测试代码  | Test code**
+```gdscript
+extends Node
+#这个脚本需要设置为全局脚本 | This script needs to be set as a global script
+const _表格路径:String= "res://test.xlsx"#excel
+var _excel = ExcelReader.ExcelFile.open(_表格路径)
+var _workbook = _excel.get_workbook()
+#godot_excel_reader：https://github.com/johnnash2017/godot_excel_reader
 
+var 语言: TableInstance.DataTable = TableInstance.generate_queryable_data(_workbook,"语言")
+var 技能: TableInstance.DataTable = TableInstance.generate_queryable_data(_workbook,"技能")
+var 角色: TableInstance.DataTable = TableInstance.generate_queryable_data(_workbook,"角色")
+var 等级: TableInstance.DataTable = TableInstance.generate_queryable_data(_workbook,"等级")
+```
+```gdscript
+func  _ready() -> void:
+	#技能表内拥有相同ID，是个多级表，需要额外输入一个等级参数
+	#多级表输入额外的参数是用来确定该数据等级的，不同ID的等级数量可以不同
+	print(Table.技能.get_data("火球术","升级说明",2))
+	print(Table.技能.get_data("火球术","升级说明",3))
+	print(Table.技能.get_data("火球术","升级说明",4))
+	
+	#等级表内没有多个ID，是个非多级表，不需要输入等级参数，输入了也没用
+	#并且其ID是Int类型，ID可以是字符类型也可以是数值类型
+	print(Table.等级.get_data(1,"经验需求"))
+	print(Table.等级.get_data(2,"经验需求"))
+	print(Table.等级.get_data(3,"经验需求"))
+	print(Table.等级.get_data(4,"经验需求"))
+	
+	#任何列类型都在ableInstance的convert_data_type方法处理
+	#布尔值类型在TableInstance的BOOLEAN_IDENTIFIERS属性和config_to_boolean方法中定义
+	print(Table.角色.get_data("战士","远程"))
+	print(Table.角色.get_data("射手","远程"))
+	
+	print(Table.语言.get_data("文本1","文本_英文"))
+	print(Table.语言.get_data("文本2","文本_英文"))
+	
+	print(Table.语言.data)
+```
+
+**输出结果 | Output result**
+
+![image](https://github.com/user-attachments/assets/52c67eed-9f76-420f-a0a0-e976cf7e6c87)
 
 
 #这部分负责从字典转换为表格实例，提供查询 | This part is responsible for converting from dictionary to table instance, providing query functionality
 
-核心代码 | Core code
+**核心代码 | Core code**
 ```gdscript
 class_name TableInstance
 const UNIQUE_IDENTIFIER:String = "ID"  # 常量：唯一标识符字段名 | Constant: Unique identifier field name
