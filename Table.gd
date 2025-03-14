@@ -3,6 +3,7 @@ extends Node
 const _表格路径:String= "res://test.xlsx"#excel
 var _excel = ExcelReader.ExcelFile.open(_表格路径)
 var _workbook = _excel.get_workbook()
+#godot_excel_reader：https://github.com/johnnash2017/godot_excel_reader
 
 var 语言: TableInstance.DataTable = TableInstance.generate_queryable_data(_workbook,"语言")
 var 技能: TableInstance.DataTable = TableInstance.generate_queryable_data(_workbook,"技能")
