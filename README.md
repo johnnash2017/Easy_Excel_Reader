@@ -2,7 +2,7 @@
 
 **概述| overview**
 
-这是一个超级轻量的.xlsx读取并应用其数据的工具。 |  This is a super lightweight tool for reading.xlsx files and applying their data.
+这是一个轻量的.xlsx读取并应用其数据的工具。 |  This is a super lightweight tool for reading.xlsx files and applying their data.
 
 创建一个godot4.4新工程并覆盖至根目录，然后关闭编辑器再重新打开编辑器以保证错误的UID引用被修正即可运行test.tscn场景进行测试。 |  Create a new Godot 4.4 project and overwrite it to the root directory, then close and reopen the editor to ensure that the incorrect UID references are corrected, and you can run the test.tscn scene for testing.
 
